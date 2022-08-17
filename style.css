@@ -33,6 +33,7 @@ button{
     flex-wrap: wrap;
     margin: 0 auto;
     width: 600px;
+    height: 600px;
 }
 
 #sketch-container > div{

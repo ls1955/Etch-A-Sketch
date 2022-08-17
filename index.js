@@ -1,14 +1,11 @@
 const mainContainer = document.querySelector("#main-container");
 const sketchContainer = document.querySelector("#sketch-container");
 
-let sketchContainerWidth = sketchContainer.clientWidth;
-sketchContainer.style.height = `${sketchContainer.clientWidth}px`;
-
 function createGridLayout(column, row){
+    // individual childContainers' size
     let childContainerWidth = sketchContainer.clientWidth/column;
     let childContainerHeight = sketchContainer.clientHeight/row;
 
-    // prepare extra column which push grid into new row
     column++;
 
     for(let i=0; i<(column * row); i++){
@@ -16,12 +13,15 @@ function createGridLayout(column, row){
         const childContainer = document.createElement("div");
         childContainer.classList = "child-container";
 
-        // column that located at beginning of new row
+        /* extra column from line 9
+           which push childContainers
+           into new role */
         if(i%column === 0){
             childContainer.style.border = "0";
             childContainer.style.width = "100%";
             childContainer.style.height = "0";
         }else{
+            // regular childContainers
             childContainer.style.width = `${childContainerWidth}px`;
             childContainer.style.height = `${childContainerHeight}px`;
         }
@@ -62,6 +62,7 @@ function paintSquare(){
     childContainers.forEach((childContainer)=>{
         childContainer.addEventListener("mouseover", ()=>{
             let color;
+
             if(latestButtonPressed === "black"){
                 color = "rgb(20,20,20)";
             }else if(latestButtonPressed === "white"){
@@ -74,12 +75,11 @@ function paintSquare(){
                     percentageColor -= 25.5;
                 }
             }
+
             childContainer.style.backgroundColor = color;
         });
     });
 }
-
-
 
 let squareAmount = 16;
 button.addEventListener("click", ()=>{
